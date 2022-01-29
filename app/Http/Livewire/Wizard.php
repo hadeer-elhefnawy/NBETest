@@ -30,7 +30,7 @@ class Wizard extends Component
 {
 
     public $currentStep = 1;
-    public array $role_function=array();
+    public array $role_function = [''];
     // New Access Matrix
     public $group_name, $role_id, $role_description, $centralizaton_role, $status,$home_branch_no,$version_no,$completed,
     // Maintenance
@@ -100,12 +100,12 @@ class Wizard extends Component
     {
         $i = $i + 1;
         $this->i = $i;
-        array_push($this->inputs ,$i);
+        array_push($this->role_function ,"");
     }
 
     public function remove($i)
     {
-        unset($this->inputs[$i]);
+        unset($this->role_function[$i]);
     }
 
 
@@ -117,13 +117,13 @@ class Wizard extends Component
     public function mount()
     {
 
-        // return view('livewire.wizard');    
+        // return view('livewire.wizard');
 
         // if (Auth::check()){
-        //     return view('livewire.wizard');    
-        // } else {        
+        //     return view('livewire.wizard');
+        // } else {
 
-        //     // validation not successful, send back to form 
+        //     // validation not successful, send back to form
         //     // return redirect('login');
         //     // return redirect(route('login'));
 
@@ -151,21 +151,21 @@ class Wizard extends Component
             'sub_menu1' => 'required|string|max:50|exists:fc_function_description,SUB_MENU_1',
             'sub_menu2' => 'required|string|max:50|exists:fc_function_description,SUB_MENU_2',
             'maint_description' => 'required|string|max:50|exists:fc_function_description,DESCRIPTION',
-        
+
             // 'role_function.*' => 'required|string|max:10|exists:fc_function_description,FUNCTION_ID',
             // 'main_menu.*' => 'required|string|max:50|exists:fc_function_description,MAIN_MENU',
             // 'sub_menu1.*' => 'required|string|max:50|exists:fc_function_description,SUB_MENU_1',
             // 'sub_menu2.*' => 'required|string|max:50|exists:fc_function_description,SUB_MENU_2',
             // 'maint_description.*' => 'required|string|max:50|exists:fc_function_description,DESCRIPTION',
-        
-        
-        
+
+
+
             ],
 
-    
-    
+
+
     );
-  
+
         $this->currentStep = 3;
     }
 
@@ -177,18 +177,18 @@ class Wizard extends Component
             'sub_menu1_report' => 'required|string|max:50|exists:fc_function_description,SUB_MENU_1',
             'sub_menu2_report' => 'required|string|max:50|exists:fc_function_description,SUB_MENU_2',
             'report_description' => 'required|string|max:50|exists:fc_function_description,DESCRIPTION',
-         
+
         ]);
-  
+
         $this->currentStep = 4;
     }
 
-  
+
     /////////////////////****************************************************/////////////////////////
 
     public function submitForm()
-    { 
-        
+    {
+
         $first_insert = Fcaccessmatrix::create([
             'group_name' => $this->group_name,
             'role_id' => $this->role_id,
@@ -196,7 +196,7 @@ class Wizard extends Component
             'centralizaton_role' => '0',
             'status' => '0',
             'home_branch_no' => $this->home_branch_no,
-            'version_no' => $this->version_no, 
+            'version_no' => $this->version_no,
 
         ]);
         $role_id=$first_insert->id;
@@ -250,7 +250,7 @@ class Wizard extends Component
 
 public function back($step)
 {
-    $this->currentStep = $step;    
+    $this->currentStep = $step;
 }
 
 
@@ -407,7 +407,7 @@ public function clearForm()
 
     // $this->role_id = '';
     // $this->password_restriction = '';
-    
+
     // Branch Limit
 
     // $this->authorizer_role = '';
